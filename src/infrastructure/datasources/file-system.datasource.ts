@@ -1,6 +1,6 @@
 import fs from "node:fs";
-import { LogDataSource } from "../../domain/datasources/log.datasource";
-import { LogEntity, LogSeverityLevel } from "../../domain/entities/log-entity";
+import { LogDataSource } from "@/domain/datasources/log.datasource";
+import { LogEntity, LogSeverityLevel } from "@/domain/entities/log-entity";
 
 export class FileSystemDataSource implements LogDataSource {
   private readonly logsPath = "logs/";
@@ -33,15 +33,15 @@ export class FileSystemDataSource implements LogDataSource {
 
     switch (newLog.severity) {
       case LogSeverityLevel.low:
-        fs.appendFileSync(this.lowLevelLogsPath, logContent);
+        fs.appendFileSync(this.lowLevelLogsPath, `${logContent}\n`);
         break;
 
       case LogSeverityLevel.medium:
-        fs.appendFileSync(this.mediumLevelLogsPath, logContent);
+        fs.appendFileSync(this.mediumLevelLogsPath, `${logContent}\n`);
         break;
 
       case LogSeverityLevel.high:
-        fs.appendFileSync(this.highLevelLogsPath, logContent);
+        fs.appendFileSync(this.highLevelLogsPath, `${logContent}\n`);
         break;
 
       default:
