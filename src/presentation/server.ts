@@ -1,8 +1,7 @@
-import { CronJob } from "cron";
-import { CronService } from "./services.cron-service";
-import { CheckService } from "../domain/use-cases/check-sevice.use-case";
-import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository";
-import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
+import { CronService } from "./services/cron-service";
+import { CheckService } from "@/domain/use-cases/check-sevice.use-case";
+import { LogRepositoryImpl } from "@/infrastructure/repositories/log.repository";
+import { FileSystemDataSource } from "@/infrastructure/datasources/file-system.datasource";
 
 const FileSystemLogRepository = new LogRepositoryImpl(
   new FileSystemDataSource(),
@@ -10,8 +9,10 @@ const FileSystemLogRepository = new LogRepositoryImpl(
 
 export class Server {
   public static start() {
-    const url = "http://localhost:3000/posts";
     console.log("Server started...");
+
+    const url = "http://uhernandez.com";
+
     CronService.createService("*/3 * * * * *", () => {
       new CheckService(
         FileSystemLogRepository,

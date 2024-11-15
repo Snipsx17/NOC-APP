@@ -1,4 +1,4 @@
-import { Server } from "./presentation/server";
+import { Server } from "@/presentation/server";
 
 const main = (): void => {
   Server.start();
